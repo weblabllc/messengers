@@ -1,0 +1,75 @@
+{
+  "name": "@risklight/messengers",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Framework-free messenger delivery channels behind one interface: Telegram, Viber, TurboSMS, eSputnik",
+  "keywords": [
+    "telegram",
+    "viber",
+    "sms",
+    "turbosms",
+    "esputnik",
+    "notifications",
+    "messenger",
+    "typescript"
+  ],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./channel": {
+      "types": "./dist/channel.d.ts",
+      "import": "./dist/channel.js",
+      "default": "./dist/channel.js"
+    },
+    "./telegram": {
+      "types": "./dist/telegram-channel.d.ts",
+      "import": "./dist/telegram-channel.js",
+      "default": "./dist/telegram-channel.js"
+    },
+    "./viber": {
+      "types": "./dist/viber-channel.d.ts",
+      "import": "./dist/viber-channel.js",
+      "default": "./dist/viber-channel.js"
+    },
+    "./turbosms": {
+      "types": "./dist/turbosms-channel.d.ts",
+      "import": "./dist/turbosms-channel.js",
+      "default": "./dist/turbosms-channel.js"
+    },
+    "./esputnik": {
+      "types": "./dist/esputnik-channel.d.ts",
+      "import": "./dist/esputnik-channel.js",
+      "default": "./dist/esputnik-channel.js"
+    },
+    "./registry": {
+      "types": "./dist/registry.d.ts",
+      "import": "./dist/registry.js",
+      "default": "./dist/registry.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "prepare": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "tsc"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.8.0",
+    "vitest": "^4.1.0"
+  }
+}
