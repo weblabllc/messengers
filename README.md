@@ -33,6 +33,21 @@ const client = new EsputnikClient({ apiKey: '...', eventType: 'orderPaid' })
 await client.upsertContacts([{ channels: [{ type: 'email', value: 'a@b.ua' }] }])
 ```
 
+## TurboSMS: SMS and hybrid Viber
+
+`TurboSmsChannel` sends SMS by default. Add `viberSender` (a sender name activated in your TurboSMS account) and the same request goes out as Viber Business Message first, falling back to SMS after `hybridTtlSeconds` (default 60). Viber messages are marked transactional unless `viberTransactional: false`; transactional texts to Ukrainian numbers must match templates pre-registered with TurboSMS.
+
+```ts
+import { TurboSmsChannel } from '@risklight/messengers/turbosms'
+
+await new TurboSmsChannel().send(
+  { to: '380671234567', text: 'Замовлення ORD-1 оплачено' },
+  { apiKey: process.env.TURBOSMS_KEY, sender: 'Shop', viberSender: 'Shop' },
+)
+```
+
+`ViberChannel` is the chatbot API (`chatapi.viber.com`); since 2024 bots are issued to businesses on application and billed monthly, so for transactional delivery to phone numbers the hybrid TurboSMS route is the practical one.
+
 ## Test
 
 ```bash
