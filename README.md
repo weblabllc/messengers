@@ -35,7 +35,7 @@ await client.upsertContacts([{ channels: [{ type: 'email', value: 'a@b.ua' }] }]
 
 ## TurboSMS: SMS and hybrid Viber
 
-`TurboSmsChannel` sends SMS by default. Add `viberSender` (a sender name activated in your TurboSMS account) and the same request goes out as Viber Business Message first, falling back to SMS after `hybridTtlSeconds` (default 60). Viber messages are marked transactional unless `viberTransactional: false`; transactional texts to Ukrainian numbers must match templates pre-registered with TurboSMS.
+`TurboSmsChannel` sends SMS by default. Add `viberSender` (a sender name activated in your TurboSMS account) and the same request goes out as Viber Business Message first, falling back to SMS after `hybridTtlSeconds` (default 60, clamped to TurboSMS's 30–86400 range; sent as `viber.ttl` + `sms.hybrid_ttl`). Viber messages are marked transactional unless `viberTransactional: false`; transactional texts to Ukrainian numbers must match templates pre-registered with TurboSMS.
 
 ```ts
 import { TurboSmsChannel } from '@risklight/messengers/turbosms'
@@ -47,6 +47,10 @@ await new TurboSmsChannel().send(
 ```
 
 `ViberChannel` is the chatbot API (`chatapi.viber.com`); since 2024 bots are issued to businesses on application and billed monthly, so for transactional delivery to phone numbers the hybrid TurboSMS route is the practical one.
+
+## Errors and timeouts
+
+Every channel posts with a 10 s `AbortSignal.timeout`; a non-JSON reply (a proxy's 502 page) comes back as `{ ok: false, detail: '<status>: <body>' }` instead of throwing. TurboSMS codes 800–803 all count as sent.
 
 ## Test
 

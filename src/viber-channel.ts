@@ -1,4 +1,5 @@
 import { NotificationChannel, NotificationMessage, NotificationResult } from './channel.js';
+import { failure, postJson } from './http.js';
 
 export interface ViberConfig {
     authToken: string;
@@ -9,7 +10,7 @@ export class ViberChannel implements NotificationChannel<ViberConfig> {
     readonly code = 'viber';
 
     async send(message: NotificationMessage, config: ViberConfig): Promise<NotificationResult> {
-        const res = await fetch('https://chatapi.viber.com/pa/send_message', {
+        const res = await postJson<{ status: number; status_message?: string }>('https://chatapi.viber.com/pa/send_message', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -22,7 +23,7 @@ export class ViberChannel implements NotificationChannel<ViberConfig> {
                 text: message.text,
             }),
         });
-        const body = (await res.json()) as { status: number; status_message?: string };
-        return { ok: body.status === 0, detail: body.status_message };
+        if (!res.body) return failure(res);
+        return { ok: res.body.status === 0, detail: res.body.status_message };
     }
 }

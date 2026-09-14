@@ -1,4 +1,5 @@
 import { NotificationChannel, NotificationMessage, NotificationResult } from './channel.js';
+import { DEFAULT_TIMEOUT_MS } from './http.js';
 
 export interface EsputnikConfig {
     apiKey: string;
@@ -32,6 +33,7 @@ export class EsputnikClient {
     async request(method: string, path: string, data?: unknown): Promise<{ ok: boolean; status: number; body: unknown }> {
         const base = (this.config.baseUrl ?? DEFAULT_BASE_URL).replace(/\/$/, '');
         const res = await fetch(`${base}/${path}`, {
+            signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
             method,
             headers: {
                 authorization: this.authHeader(),
