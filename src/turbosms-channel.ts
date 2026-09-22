@@ -32,7 +32,7 @@ export function turboSmsPayload(message: NotificationMessage, config: TurboSmsCo
 }
 
 export class TurboSmsChannel implements NotificationChannel<TurboSmsConfig> {
-    readonly code = 'sms';
+    readonly code = 'turbosms';
 
     async send(message: NotificationMessage, config: TurboSmsConfig): Promise<NotificationResult> {
         const res = await postJson<{ response_code?: number; response_status?: string }>('https://api.turbosms.ua/message/send.json', {

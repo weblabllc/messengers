@@ -1,6 +1,6 @@
 {
-  "name": "@risklight/messengers",
-  "version": "0.2.1",
+  "name": "@weblabllc/messengers",
+  "version": "0.3.0",
   "type": "module",
   "description": "Framework-free messenger delivery channels behind one interface: Telegram, Viber, TurboSMS, eSputnik",
   "keywords": [
@@ -14,13 +14,14 @@
     "typescript"
   ],
   "license": "MIT",
+  "author": "WebLab LLC <hello@weblab.llc>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RiskLightS/messengers.git"
+    "url": "git+https://github.com/weblabllc/messengers.git"
   },
-  "homepage": "https://github.com/RiskLightS/messengers",
+  "homepage": "https://github.com/weblabllc/messengers#readme",
   "bugs": {
-    "url": "https://github.com/RiskLightS/messengers/issues"
+    "url": "https://github.com/weblabllc/messengers/issues"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -62,7 +63,10 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
   ],
   "sideEffects": false,
   "engines": {
@@ -77,10 +81,12 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "build": "tsc",
-    "lint": "oxlint src/"
+    "lint": "oxlint src/",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
+    "@vitest/coverage-v8": "^4.1.11",
     "oxlint": "^1.80.0",
     "typescript": "^5.8.0",
     "vitest": "^4.1.0"

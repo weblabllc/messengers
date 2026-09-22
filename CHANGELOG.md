@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0 — 2026-09-22
+
+- Package renamed to `@weblabllc/messengers`.
+- **Breaking:** the TurboSMS channel code is now `turbosms` (was `sms`), so `registry.get('turbosms')` finds the channel it was created from.
+- Telegram: truncation at 4096 characters no longer splits a surrogate pair (emoji); `truncateUtf16` is exported.
+- Tests for Telegram, Viber and registry composition with custom channels.
+
 ## 0.2.1
 - TurboSMS hybrid: `viber.ttl` + `sms.hybrid_ttl` (the root `hybrid_ttl` was ignored by the API); response codes 801–803 count as sent
 - All channels: 10 s request timeout, non-JSON replies become `{ ok: false }` instead of throwing; Telegram text capped at 4096
