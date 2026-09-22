@@ -1,5 +1,7 @@
 # @weblabllc/messengers
 
+[![npm](https://img.shields.io/npm/v/@weblabllc/messengers)](https://www.npmjs.com/package/@weblabllc/messengers) [![ci](https://github.com/weblabllc/messengers/actions/workflows/ci.yml/badge.svg)](https://github.com/weblabllc/messengers/actions/workflows/ci.yml) [![license](https://img.shields.io/npm/l/@weblabllc/messengers)](LICENSE)
+
 Framework-free delivery channels behind one `NotificationChannel` interface: Telegram Bot API, Viber, TurboSMS, eSputnik. No framework imports, no storage — pure clients over `fetch`.
 
 ## Install
